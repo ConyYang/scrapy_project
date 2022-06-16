@@ -20,7 +20,7 @@ for i in range(101, 151):
             if x % 3 == 0:
                 link_list.append(link['href'])
 # Open File
-resultFyle = open("output101-150.csv",'w')
+resultFyle = open("koreanNewsWire50_100/output101-150.csv", 'w')
 
 # Write data to file
 for r in link_list:

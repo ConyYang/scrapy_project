@@ -43,10 +43,10 @@ if __name__ == '__main__':
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.0.0 Safari/537.36'
     }
     arr_info = []
-    url_list = pd.read_csv('output1_50.csv')['URL_Links']
+    url_list = pd.read_csv('koreanNewsWire50_100/output51-100.csv')['URL_Links']
     i = 0
     j = 1
-    for url in url_list[500:]:
+    for url in url_list:
         print(i)
         i+=1
 
@@ -54,16 +54,21 @@ if __name__ == '__main__':
         text_ = str(response.content)
         title, company, website, abstract = extract_info(text_)
         print(title, company, website, abstract)
-        arr_info.append([url, title, company, website, abstract])
+        arr_info.append([title, abstract, company, website, url])
 
-        if i % 500 == 0:
+        if i % 1000 == 0:
             j += 1
             df = pd.DataFrame(np.array(arr_info),
-                           columns=['link', 'title', 'company', 'website', 'abstract'])
+                           columns=['title', 'abstract', 'company', 'website', 'link'])
 
-            df.to_excel('KoreanNewsWire1_50' + str(j) + '.xlsx')
+            df.to_excel('KoreanNewsWire51_100_' + str(j) + '.xlsx')
             arr_info = []
             i = 0
+    j += 1
+    df = pd.DataFrame(np.array(arr_info),
+                      columns=['title', 'abstract', 'company', 'website', 'link'])
+    df.to_excel('KoreanNewsWire51_100_' + str(j) + '.xlsx')
+
 
 
 
